@@ -135,7 +135,7 @@ sudo growpart /dev/sda 1
 sudo resize2fs /dev/sda1
 ```
 
-### 2) Giải nén file data vào 1 folder tên là extracted_data/
+### Giải nén file data vào 1 folder tên là extracted_data/
 
 ```bash
 # Tạo thư mục để chứa file giải nén
@@ -189,13 +189,7 @@ db.summary.getIndexes()
 
 ### 2. Xử Lý Định Vị IP
 
-### Cài Đặt Thư Viện
-
-```
-pip install ip2location
-```
-
-## Cài đặt thư viện ip2location
+### Cài đặt thư viện ip2location
 
 Cập nhật danh sách gói của hệ thống:
 
@@ -224,13 +218,16 @@ pip install pymongo
 ```
 
 1. **Connect to MongoDB**
-2. Up file code lên VM
-3. Up file IP2LOCATION-LITE-DB5.IPV6.BIN lên VM để load cơ sở dữ liệu IP2Location
+   
+    Code trong file **project05_code.py**
+
+3. Up file code lên VM
+4. Up file IP2LOCATION-LITE-DB5.IPV6.BIN lên VM để load cơ sở dữ liệu IP2Location
 
 ### Chạy Script
 
 ```
-python scripts/process_ip.py
+python3 project05_code.py
 ```
 
 ### 3. Thu Thập Tên Sản Phẩm
