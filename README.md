@@ -104,15 +104,15 @@ sudo apt update
 sudo apt install gcsfuse -y
 ```
 
-1. Tạo 1 directory để mount bucket
+2. Tạo 1 directory để mount bucket
 
 ```bash
 mkdir ~/gcs_bucket
 ```
 
-1. Mount bucket
+3. Mount bucket
 
-```sql
+```bash
 gcsfuse bucket_project05 ~/gcs_bucket
 ```
 
@@ -163,25 +163,25 @@ extracted_data/dump/countly/summary.bson
 mongosh --host 127.0.0.1 --port 27017
 ```
 
-1. Chuyển sang database `countly`:
+2. Chuyển sang database `countly`:
 
 ```bash
 use countly
 ```
 
-1. Kiểm tra dữ liệu:
+3. Kiểm tra dữ liệu:
 
 ```bash
 db.summary.findOne()
 ```
 
-1. Kiểm tra số lượng document đã import:
+4. Kiểm tra số lượng document đã import:
 
 ```bash
 db.summary.countDocuments()
 ```
 
-1. Kiểm tra indexes đã tạo:
+5. Kiểm tra indexes đã tạo:
 
 ```bash
 db.summary.getIndexes()
@@ -217,7 +217,7 @@ pip install ip2location
 pip install pymongo
 ```
 
-1. **Connect to MongoDB**
+2. **Connect to MongoDB**
    
     Code trong file **project05_code.py**
 
