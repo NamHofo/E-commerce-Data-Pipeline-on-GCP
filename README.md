@@ -88,14 +88,103 @@ Dự án này tập trung vào việc thiết lập một pipeline dữ liệu m
 
 ---
 
-## Xử Lý Dữ Liệu
+## Nhập Dữ Liệu Vào MongoDB
 
-### 1. Nhập Dữ Liệu Vào MongoDB
+Vì đã upload file glamira_ubl_oct2019_nov2019.tar.gz lên buckets gcp, nên ở bước này, thì cần download file từ bucket về VM.
 
+### 1) Mount bucket to VM
+
+1. Tải gcsfuse
+
+```bash
+export GCSFUSE_REPO=gcsfuse-`lsb_release -c -s`
+echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | sudo tee /etc/apt/sources.list.d/gcsfuse.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo apt update
+sudo apt install gcsfuse -y
 ```
-mongosh
+
+1. Tạo 1 directory để mount bucket
+
+```bash
+mkdir ~/gcs_bucket
+```
+
+1. Mount bucket
+
+```sql
+gcsfuse bucket_project05 ~/gcs_bucket
+```
+
+Error: Với cách này khá khó vì dung lượng VM chỉ có 10GB và có dính tới các quyền truy cập trên Buckets → Nên mở rộng dung lượng VM và giải nén file 
+
+### Mở rộng dung lượng VM
+
+ Bước 1: Cài đặt `sfdisk` , `growpart`  và `cloud-guest-utils`
+
+```bash
+sudo apt update
+sudo apt install fdisk cloud-guest-utils -y
+sudo apt install cloud-guest-utils -y
+```
+
+ Bước 2: Chạy lại lệnh mở rộng phân vùng
+
+```bash
+sudo growpart /dev/sda 1
+sudo resize2fs /dev/sda1
+```
+
+### 2) Giải nén file data vào 1 folder tên là extracted_data/
+
+```bash
+# Tạo thư mục để chứa file giải nén
+mkdir -p extracted_data
+
+# Sao chép file từ GCS về VM
+gsutil cp gs://bucket_project05/glamira_ubl_oct2019_nov2019.tar.gz .
+
+# Giải nén file vào thư mục extracted_data
+tar -xzvf glamira_ubl_oct2019_nov2019.tar.gz -C extracted_data/
+```
+
+## Import raw data into MongoDB
+
+```bash
+mongorestore --db countly --collection summary 
+extracted_data/dump/countly/summary.bson
+```
+
+**Kiểm tra dữ liệu sau khi import**
+
+1. Mở Mongo shell:
+
+```bash
+mongosh --host 127.0.0.1 --port 27017
+```
+
+1. Chuyển sang database `countly`:
+
+```bash
 use countly
+```
+
+1. Kiểm tra dữ liệu:
+
+```bash
+db.summary.findOne()
+```
+
+1. Kiểm tra số lượng document đã import:
+
+```bash
 db.summary.countDocuments()
+```
+
+1. Kiểm tra indexes đã tạo:
+
+```bash
+db.summary.getIndexes()
 ```
 
 ### 2. Xử Lý Định Vị IP
@@ -105,6 +194,38 @@ db.summary.countDocuments()
 ```
 pip install ip2location
 ```
+
+## Cài đặt thư viện ip2location
+
+Cập nhật danh sách gói của hệ thống:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+Cài đặt python và pip
+
+```bash
+sudo apt install python3 python3-pip -y
+```
+
+Cài đặt thư viện `ip2location`
+
+```bash
+pip install ip2location
+```
+
+### Write Python script
+
+1. Import pymongo
+
+```sql
+pip install pymongo
+```
+
+1. **Connect to MongoDB**
+2. Up file code lên VM
+3. Up file IP2LOCATION-LITE-DB5.IPV6.BIN lên VM để load cơ sở dữ liệu IP2Location
 
 ### Chạy Script
 
