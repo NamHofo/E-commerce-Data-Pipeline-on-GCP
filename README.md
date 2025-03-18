@@ -292,4 +292,4 @@ mongoexport --db countly --collection temp_results --type=csv --fields _id,produ
 - Tối ưu hóa chỉ mục cơ sở dữ liệu để truy vấn nhanh hơn
 - Tích hợp các công cụ trực quan hóa để phân tích dữ liệu tốt hơn
 
-![gvto.svg](attachment:b2796a21-acbc-4bb6-8865-0b5af6a5afe1:gvto.svg)
+![gvto.svg](image/gvto.svg)
