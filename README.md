@@ -21,6 +21,23 @@ Dự án này tập trung vào việc thiết lập một pipeline dữ liệu m
 - Áp dụng tra cứu vị trí địa lý từ địa chỉ IP
 
 ---
+## Tổng quan về dữ liệu
+
+Bộ dữ liệu này được lưu trữ trong MongoDB dưới collection summary_with_location, ghi lại các sự kiện tương tác của người dùng trên một nền tảng thương mại điện tử (ví dụ: Glamira.fr). Mỗi tài liệu đại diện cho một hành động cụ thể của người dùng, chẳng hạn như xem chi tiết sản phẩm (view_product_detail), kèm theo thông tin chi tiết về thiết bị, vị trí, thời gian, và các tham số liên quan đến sản phẩm.
+
+### Đặc điểm chính:
+
+- **Mục đích:** Theo dõi hành vi người dùng, hỗ trợ phân tích trải nghiệm người dùng và tối ưu hóa chiến dịch tiếp thị.
+- **Định dạng:** Dữ liệu dạng JSON, chứa các trường đơn (string, number, boolean) và các trường lồng nhau (array, object).
+- **Thông tin chính bao gồm:**
+    - **Danh tính người dùng:** user_id_db, device_id, email_address.
+    - **Thời gian:** time_stamp (Unix epoch), local_time (datetime string).
+    - **Vị trí:** ip và thông tin địa lý chi tiết trong location_info (quốc gia, vùng, thành phố, tọa độ).
+    - **Hành vi:** current_url, referrer_url, collection, product_id, option.
+    - **Thiết bị:** user_agent, resolution.
+    - **Tiếp thị:** utm_source, utm_medium, recommendation, show_recommendation.
+- **Kích thước mẫu:** Mỗi tài liệu đại diện cho một sự kiện riêng lẻ, với các trường tùy chọn có thể trống (ví dụ: utm_source, utm_medium).
+---
 
 ## Cấu Trúc Dự Án
 
