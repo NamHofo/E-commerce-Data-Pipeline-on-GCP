@@ -537,3 +537,5 @@ Phần **Thu Thập Tên Sản Phẩm** đã được cải tiến với phươn
 
    - Xem `product_names.csv` và `failed_urls.txt`.
    - Theo dõi log (`crawl_log.txt`) để kiểm tra lỗi, % bộ nhớ, và hiệu suất.
+  
+   ![gvto.svg](attachment:b2796a21-acbc-4bb6-8865-0b5af6a5afe1:gvto.svg)
