@@ -48,17 +48,17 @@ Bộ dữ liệu này được lưu trữ trong MongoDB dưới collection `summ
    - Tạo và cấu hình instance VM trên GCP Compute Engine.
    - Cài đặt MongoDB, Python, và các thư viện cần thiết (`playwright`, `pymongo`, `psutil`, `beautifulsoup4`).
 
-3. [Nhập Dữ Liệu Thô](#Nhập-Dữ-Liệu-Thô)
+3. [Nhập Dữ Liệu Vào MongoDB](#Nhập-Dữ-Liệu-Vào-MongoDB)
 
    - Tải file dữ liệu (`glamira_ubl_oct2019_nov2019.tar.gz`) từ GCS về VM.
    - Giải nén và nhập dữ liệu vào MongoDB (collection `summary` trong database `countly`).
 
-4. [Làm Giàu Dữ Liệu IP](#Làm-Giàu-Dữ-Liệu-IP)
+4. [Xử Lý Định Vị IP](#Xử-Lý-Định-Vị-IP)
 
-   - Sử dụng thư viện `ip2location` và cơ sở dữ liệu `IP2LOCATION-LITE-DB5.IPV6.BIN` để thêm thông tin định vị địa lý (quốc gia, thành phố, tọa độ) vào collection `summary_with_location`.
+-  - Sử dụng thư viện `ip2location` và cơ sở dữ liệu `IP2LOCATION-LITE-DB5.IPV6.BIN` để thêm thông tin định vị địa lý (quốc gia, thành phố, tọa độ) vào collection `summary_with_location`.
 
-5. [Trích Xuất Tên Sản Phẩm](#Trích-Xuất-Tên-Sản-Phẩm)
-   - [Web Crawling với Playwright[:
+5. [Thu Thập Tên Sản Phẩm](#Thu-Thập-Tên-Sản-Phẩm)
+-  - [Web Crawling với Playwright[:
      - Truy vấn `summary_with_location` để lấy danh sách `product_id` và `current_url`, lưu vào collection `product_id_and_url`.
      - Sử dụng Playwright và đa luồng (`ThreadPoolExecutor`) để crawl tên sản phẩm từ HTML (ưu tiên thẻ `<span class="base">`).
      - Tối ưu hiệu suất: 4 luồng, độ trễ 1.5 giây, kiểm tra bộ nhớ (80% ngưỡng), user-agent ngẫu nhiên.
