@@ -258,7 +258,7 @@ pip install ip2location
 3. **Chạy script**:
 
    ```bash
-   python3 project05_code.py
+   python3 ip_location_processing.py
    ```
 
 ## Thu Thập Tên Sản Phẩm
@@ -314,7 +314,7 @@ playwright install
 ##### Chạy script:
 
 ```bash
-python3 web_crawler_multithread.py
+python3 product_name_crawl.py
 ```
 
 ##### Kết quả:
