@@ -4,3 +4,6 @@ gcp_key/
 IP2LOCATION-LITE-DB5.IPV6.BIN
 ip_location_processing.log
 IP2LOCATION-LITE-DB5.IPV6.BIN.zip
+config.py
+/home/hofonam/E-commerce-Data-Pipeline-on-GCP/__pycache__
+/home/hofonam/E-commerce-Data-Pipeline-on-GCP/venv
